@@ -46,7 +46,13 @@ public class Armour extends Item {
      */
     public Armour()
     {
-
+        super("");
+        durability    =  0;
+        defense       =  0;
+        material      = "";
+        modifier      = "";
+        modifierLevel =  0;
+        element       = "";
     }
 
     /**
@@ -56,7 +62,13 @@ public class Armour extends Item {
      */
     public Armour(Armour src)
     {
-
+        super.name          = src.name;
+        this.durability     = src.durability;
+        this.defense        = src.defense;      
+        this.material       = src.material;     
+        this.modifier       = src.modifier;   
+        this.modifierLevel  = src.modifierLevel;
+        this.element        = src.element;
     }
 
     /**
@@ -191,7 +203,13 @@ public class Armour extends Item {
     @Override
     public void read(Scanner snr)
     {
-
+        super.name         = snr.next();
+        this.material      = snr.next();
+        this.durability    = snr.nextInt();
+        this.defense       = snr.nextInt();     
+        this.modifier      = snr.next();
+        this.modifierLevel = snr.nextInt();
+        this.element       = snr.next();
     }
 
     /**
@@ -200,7 +218,7 @@ public class Armour extends Item {
     @Override
     public Item clone()
     {
-        return new Armour(this);
+        return new Armour(this); 
     }
 
     /**
@@ -216,10 +234,11 @@ public class Armour extends Item {
             return false;
         }
 
-        Armour rhsItem = (Armour) rhs;
-
-        // Replace the next line
-        return false;
+        Armour rhsItem = (Armour) rhs; //set new item as rhs casted as an Armour obj
+        return (rhsItem.name.equals(super.name)        && 
+                rhsItem.material.equals(this.material) && 
+                rhsItem.modifier.equals(this.modifier) && 
+                rhsItem.element.equals(this.element)); 
     }
 
     /**
@@ -229,7 +248,7 @@ public class Armour extends Item {
     @Override
     public int hashCode()
     {
-        return -1;
+        return name.hashCode() + material.hashCode() + modifier.hashCode() + element.hashCode();
     }
 
     /**
@@ -238,7 +257,13 @@ public class Armour extends Item {
     @Override
     public String toString()
     {
-        return "";
+        String opStr = "  Nme: " + super.name                                          + '\n'
+                     + "  Dur: " + this.durability                                     + '\n'
+                     + "  Def: " + this.defense                                        + '\n'
+                     + "  Mtl: " + this.material                                       + '\n'
+                     + "  Mdr: " + this.modifier + " (Lvl " + this.modifierLevel + ')' + '\n'
+                     + "  Emt: " + this.element                                        + '\n';
+        return opStr;
     }
 }
 
